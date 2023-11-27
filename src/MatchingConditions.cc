@@ -142,21 +142,25 @@ double a_Qg_30(double x, int v, int damp, double m2Q2) {
 
     double f = 1.;
 
+    if (damp!=0) {
+        f = 1 - 1. / (1. + exp(2. / m2Q2 - 8.));
+        if (v == 1) {
+            return a_Qg_30(x, 0) + f * (a_Qg_30(x, 1) - a_Qg_30(x, 0)) ;
+        }
+        if (v == -1) {
+            return a_Qg_30(x, 0) + f * (a_Qg_30(x, -1) - a_Qg_30(x, 0)) ;
+        }
+    }
+
     if (v == 0) {
         return 0.5 * (a_Qg_30(x, 1) + a_Qg_30(x, -1));
     } else if (v == 1) {
-        if (damp!=0) {
-            f = 1. / (1. + exp(2. / m2Q2 - 8.));
-        }
-        return f * (
+        return (
             354.1002 * L13 + 479.3838 * L12 - 7856.784 * (2. - x)
             - 6233.530 * L2 + 9416.621 / x + 1548.891 / x * L
         );
     } else if (v == -1) { // Updated version w.r.t v==-12
-        if (damp!=0) {
-            f = 1. / (1. + exp(2. / m2Q2 - 8.));
-        }
-        return f * (
+        return (
             226.3840 * L13 - 652.2045 * L12 - 2686.387 * L1
             - 7714.786 * (2. - x) - 2841.851 * L2 + 7721.120 / x
             + 1548.891 / x * L
