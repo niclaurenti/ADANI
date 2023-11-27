@@ -129,7 +129,7 @@ double K_Qg2(double x, double m2mu2) {
 //  v = -12 : Eq. (3.50) of Ref. [arXiv:1205.5727]
 //------------------------------------------------------------------------------------------//
 
-double a_Qg_30(double x, int v) {
+double a_Qg_30(double x, int v, int damp, double m2Q2) {
 
     double L = log(x);
     double L2 = L * L;
@@ -140,15 +140,23 @@ double a_Qg_30(double x, int v) {
     double L12 = L1 * L1;
     double L13 = L12 * L1;
 
+    double f = 1.;
+
     if (v == 0) {
         return 0.5 * (a_Qg_30(x, 1) + a_Qg_30(x, -1));
     } else if (v == 1) {
-        return (
+        if (damp!=0) {
+            f = 1. / (1. + exp(2. / m2Q2 - 8.));
+        }
+        return f * (
             354.1002 * L13 + 479.3838 * L12 - 7856.784 * (2. - x)
             - 6233.530 * L2 + 9416.621 / x + 1548.891 / x * L
         );
     } else if (v == -1) { // Updated version w.r.t v==-12
-        return (
+        if (damp!=0) {
+            f = 1. / (1. + exp(2. / m2Q2 - 8.));
+        }
+        return f * (
             226.3840 * L13 - 652.2045 * L12 - 2686.387 * L1
             - 7714.786 * (2. - x) - 2841.851 * L2 + 7721.120 / x
             + 1548.891 / x * L

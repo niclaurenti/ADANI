@@ -2953,7 +2953,7 @@ double D2_g3_highscale(double x, double m2Q2, double m2mu2, int nf, int v) {
            + CF * nf * (1. - 2. * x + 2. * x2) * (69. - 28. * zeta2)
            // from erratum
            + 8. / 9 * zeta3 - 16. / 9 * zeta3 * x + 16. / 9 * zeta3 * x2
-           + a_Qg_30(x, v) + C2_g3_massless(x, nf + 1) / (nf + 1.);
+           + a_Qg_30(x, v, 1, m2Q2) + C2_g3_massless(x, nf + 1) / (nf + 1.);
 }
 
 //==========================================================================================//
