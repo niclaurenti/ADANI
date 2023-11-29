@@ -143,8 +143,9 @@ double a_Qg_30(double x, int v, int damp, double m2Q2) {
     double f = 1.;
 
     if (damp!=0) {
-        f = 1 - 1. / (1. + exp(2. * (1. / m2Q2 - 4.)));
-      //   f=0.;
+        // f = 1 - 1. / (1. + exp(2. * (1. / m2Q2 - 4.)));
+        f = 1 - 1. / (1. + exp(7. * (1. / m2Q2) - 5.));
+        // f = 1.;
         if (v == 1) {
             return a_Qg_30(x, 0) + f * (a_Qg_30(x, 1) - a_Qg_30(x, 0)) ;
         }
