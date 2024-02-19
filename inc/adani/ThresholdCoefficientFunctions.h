@@ -33,8 +33,8 @@ double C2_g1_threshold(double x, double m2Q2);
 double C2_g2_threshold(double x, double m2Q2, double m2mu2);
 double CL_g2_threshold(double x, double m2Q2, double m2mu2);
 
-double threshold_expansion_g2(double x, double m2Q2, double m2mu2);
-double threshold_expansion_g2_const(double x, double m2Q2, double m2mu2);
+// double threshold_expansion_g2(double x, double m2Q2, double m2mu2);
+// double threshold_expansion_g2_const(double x, double m2Q2, double m2mu2);
 
 double C2_g2_threshold_const(double x, double m2Q2, double m2mu2);
 double CL_g2_threshold_const(double x, double m2Q2, double m2mu2);

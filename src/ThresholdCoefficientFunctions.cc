@@ -25,28 +25,28 @@ double C2_g1_threshold(double x, double m2Q2) {
 //
 //------------------------------------------------------------------------------------------//
 
-double threshold_expansion_g2(double x, double m2Q2, double m2mu2) {
+// double threshold_expansion_g2(double x, double m2Q2, double m2mu2) {
 
-    double beta = sqrt(1. - 4. * m2Q2 * x / (1. - x));
+//     double beta = sqrt(1. - 4. * m2Q2 * x / (1. - x));
 
-    double logb = log(beta);
-    double log2b = logb * logb;
+//     double logb = log(beta);
+//     double log2b = logb * logb;
 
-    return 16. * CA * log2b + (48. * CA * ln2 - 40. * CA) * logb
-           + (2 * CF - CA) * M_PI * M_PI / beta + 8. * CA * log(m2mu2) * logb;
-}
+//     return 16. * CA * log2b + (48. * CA * ln2 - 40. * CA) * logb
+//            + (2 * CF - CA) * M_PI * M_PI / beta + 8. * CA * log(m2mu2) * logb;
+// }
 
 //==========================================================================================//
 //
 //------------------------------------------------------------------------------------------//
 
-double threshold_expansion_g2_const(double m2Q2, double m2mu2) {
+// double threshold_expansion_g2_const(double m2Q2, double m2mu2) {
 
-    double xi = 1. / m2Q2;
+//     double xi = 1. / m2Q2;
 
-    return c0(xi) + 36. * CA * ln2 * ln2 - 60 * CA * ln2
-           + log(m2mu2) * (8. * CA * ln2 - c0_bar(xi));
-}
+//     return c0(xi) + 36. * CA * ln2 * ln2 - 60 * CA * ln2
+//            + log(m2mu2) * (8. * CA * ln2 - c0_bar(xi));
+// }
 
 //==========================================================================================//
 //  Threshold limit (x->xmax) of the gluon coefficient function for F2 at
@@ -58,9 +58,20 @@ double threshold_expansion_g2_const(double m2Q2, double m2mu2) {
 
 double C2_g2_threshold(double x, double m2Q2, double m2mu2) {
 
+    double beta = sqrt(1. - 4. * m2Q2 * x / (1. - x));
+    double logb = log(beta);
+    double log2b = logb * logb;
+
+    double xi = 1. / m2Q2;
+
+    double threshold_expansion_g2 = 16. * CA * log2b + 16 * CA * (3. * ln2 - 5. / 2) * logb
+           + (2 * CF - CA) * M_PI * M_PI / beta + 8. * CA * log(m2mu2) * logb;
+
+    double threshold_expansion_g2_const = c0(xi) + 36. * CA * ln2 * ln2 - 60 * CA * ln2
+           + log(m2mu2) * (8. * CA * ln2 - c0_bar(xi));
+
     return C2_g1(x, m2Q2)
-           * (threshold_expansion_g2(x, m2Q2, m2mu2)
-              + threshold_expansion_g2_const(m2Q2, m2mu2));
+           * (threshold_expansion_g2 + threshold_expansion_g2_const);
 }
 
 //==========================================================================================//
@@ -73,9 +84,21 @@ double C2_g2_threshold(double x, double m2Q2, double m2mu2) {
 
 double CL_g2_threshold(double x, double m2Q2, double m2mu2) {
 
+    double beta = sqrt(1. - 4. * m2Q2 * x / (1. - x));
+    double logb = log(beta);
+    double log2b = logb * logb;
+
+    double xi = 1. / m2Q2;
+
+    double threshold_expansion_g2 = 16. * CA * log2b + 16 * CA * (3. * ln2 - 19. / 6) * logb
+           + (2 * CF - CA) * M_PI * M_PI / beta + 8. * CA * log(m2mu2) * logb;
+
+    double threshold_expansion_g2_const = c0(xi) + 36. * CA * ln2 * ln2 - 60 * CA * ln2
+           + log(m2mu2) * (8. * CA * ln2 - c0_bar(xi));
+
     return CL_g1(x, m2Q2)
-           * (threshold_expansion_g2(x, m2Q2, m2mu2)
-              + threshold_expansion_g2_const(m2Q2, m2mu2));
+           * (threshold_expansion_g2
+              + threshold_expansion_g2_const);
 }
 
 //==========================================================================================//
